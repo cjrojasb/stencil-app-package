@@ -6,6 +6,14 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface FbcButton {
+        "color": string;
+        "fullWidth"?: boolean;
+        "loading"?: boolean;
+        "rest": HTMLButtonElement;
+        "underline"?: boolean;
+        "variant": string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -22,6 +30,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLFbcButtonElement extends Components.FbcButton, HTMLStencilElement {
+    }
+    var HTMLFbcButtonElement: {
+        prototype: HTMLFbcButtonElement;
+        new (): HTMLFbcButtonElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -29,10 +43,19 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "fbc-button": HTMLFbcButtonElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface FbcButton {
+        "color"?: string;
+        "fullWidth"?: boolean;
+        "loading"?: boolean;
+        "rest"?: HTMLButtonElement;
+        "underline"?: boolean;
+        "variant"?: string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -48,6 +71,7 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface IntrinsicElements {
+        "fbc-button": FbcButton;
         "my-component": MyComponent;
     }
 }
@@ -55,6 +79,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "fbc-button": LocalJSX.FbcButton & JSXBase.HTMLAttributes<HTMLFbcButtonElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
